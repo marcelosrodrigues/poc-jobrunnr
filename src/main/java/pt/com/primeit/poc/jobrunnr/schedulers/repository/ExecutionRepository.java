@@ -23,6 +23,6 @@ public interface ExecutionRepository extends CrudRepository<Execution, UUID> {
     Optional<Execution> findById(UUID id);
 
     @Cacheable( value = "schedules-by-tenant", key = "#id")
-    @Query("SELECT e FROM pt.com.primeit.poc.jobrunnr.schedulers.entities.Execution e JOIN FETCH e.tenant t where t.id :id")
+    @Query("SELECT e FROM Execution e JOIN e.tenant t where t.id = :id")
     Optional<Collection<Execution>> findSchedulesByTenant(@Param("id") UUID id);
 }
