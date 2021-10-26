@@ -7,22 +7,22 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pt.com.primeit.poc.jobrunnr.schedulers.entities.Execution;
+import pt.com.primeit.poc.jobrunnr.schedulers.entities.Schedule;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface ExecutionRepository extends CrudRepository<Execution, UUID> {
+public interface ScheduleRepository extends CrudRepository<Schedule, UUID> {
 
-    @CacheEvict(value = "execution", key = "#execution.getId()")
-    Execution save(Execution execution);
+    @CacheEvict(value = "schedule", key = "#execution.getId()")
+    Schedule save(Schedule schedule);
 
-    @CachePut(value = "execution", key = "#id")
-    Optional<Execution> findById(UUID id);
+    @CachePut(value = "schedule", key = "#id")
+    Optional<Schedule> findById(UUID id);
 
     @Cacheable( value = "schedules-by-tenant", key = "#id")
-    @Query("SELECT e FROM Execution e JOIN e.tenant t where t.id = :id")
-    Optional<Collection<Execution>> findSchedulesByTenant(@Param("id") UUID id);
+    @Query("SELECT e FROM Schedule e JOIN e.tenant t where t.id = :id")
+    Optional<Collection<Schedule>> findSchedulesByTenant(@Param("id") UUID id);
 }

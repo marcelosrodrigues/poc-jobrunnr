@@ -14,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor(staticName = "builder")
 @EqualsAndHashCode(of = "id")
 @Entity
-public class Execution implements Serializable {
+public class Schedule implements Serializable {
 
     @Id
     @Type(type="pg-uuid")

@@ -10,7 +10,6 @@ import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
@@ -31,9 +30,6 @@ class JobRepositoryTest {
 
     @Autowired
     private JobRepository repository;
-
-    @Autowired
-    private CacheManager cacheManager;
 
     @Test
     void save() {

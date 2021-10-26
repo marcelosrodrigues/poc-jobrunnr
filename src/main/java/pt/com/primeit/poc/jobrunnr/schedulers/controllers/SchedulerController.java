@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pt.com.primeit.poc.jobrunnr.jobs.Job;
-import pt.com.primeit.poc.jobrunnr.schedulers.entities.Execution;
+import pt.com.primeit.poc.jobrunnr.schedulers.entities.Schedule;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,7 +27,7 @@ public class SchedulerController {
 
     @SneakyThrows
     @PostMapping
-    public ResponseEntity<Execution> add(@RequestBody(required = true) Execution jobDefinition ) {
+    public ResponseEntity<Schedule> add(@RequestBody(required = true) Schedule jobDefinition ) {
 
         log.info("create a schedule to {}" , jobDefinition);
 
@@ -47,12 +47,12 @@ public class SchedulerController {
 
     @SneakyThrows
     @GetMapping
-    public ResponseEntity<List<Execution>> list() {
+    public ResponseEntity<List<Schedule>> list() {
 
         log.info("list all job executions");
         List<RecurringJob> jobs = storageProvider.getRecurringJobs();
-        List<Execution> definitions = jobs.stream()
-            .map( job -> Execution.builder(UUID.fromString(job.getId()),
+        List<Schedule> definitions = jobs.stream()
+            .map( job -> Schedule.builder(UUID.fromString(job.getId()),
                     job.getCronExpression(), null, null, null )
         ).collect(Collectors.toList());
 
